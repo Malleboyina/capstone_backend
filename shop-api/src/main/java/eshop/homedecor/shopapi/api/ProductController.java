@@ -32,10 +32,6 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    /**
-     * Show All Categories
-     */
-
     @GetMapping("/product")
     public Page<ProductInfo> findAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                      @RequestParam(value = "size", defaultValue = "5") Integer size ) {
@@ -65,11 +61,6 @@ public class ProductController {
 
         ProductInfo productInfo = productService.findOne(productId);
 
-//        // Product is not available
-//        if (productInfo.getProductStatus().equals(ProductStatusEnum.DOWN.getCode())) {
-//            productInfo = null;
-//        }
-
         return productInfo;
     }
 
@@ -89,7 +80,7 @@ public class ProductController {
     }
 
     @PutMapping("/seller/product/{id}/edit")
-    public ResponseEntity edit(@PathVariable("id") String productId,
+    public ResponseEntity<Object> edit(@PathVariable("id") String productId,
                                @Valid @RequestBody ProductInfo product,
                                BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

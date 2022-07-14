@@ -48,7 +48,6 @@ public class CartController {
     public ResponseEntity<Cart> mergeCart(@RequestBody Collection<ProductInOrder> productInOrders, Principal principal) {
         User user = userService.findOne(principal.getName());
         try {
-        	//hello
             cartService.mergeLocalCart(productInOrders, user);
         } catch (Exception e) {
             ResponseEntity.badRequest().body("Merge Cart Failed");
